@@ -1,5 +1,5 @@
 import numpy as np
-import scipy as sp
+from scipy import spatial as sp
 
 class KNearestNeighbors():
     """
@@ -13,18 +13,20 @@ class KNearestNeighbors():
         k : integer indicating the number of neareast neighbors
         type: string indicating a classification problem or regression problem
         """
-        self.training_set = training_set
-        self.test_set = test_set
+        self.training_set = np.matrix(training_set)
+        self.test_set = np.matrix(test_set)
         self.k = k
         self.type = type
         
         
-    def _distance_between_points(self):
+    def _distance_between_points(self, vector_1, vector_2):
         """
         Computes euclidean distance between points
+        vector_1: numpy matrix
+        vector_2: numpy matrix
         returns a floating point number
         """
-        pass
+        return sp.distance.euclidean(vector_1, vector_2)
         
     def fit(self):
         """
