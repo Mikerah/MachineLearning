@@ -6,31 +6,21 @@ class KNearestNeighbors():
     Implementation of the K Nearest Neighbors algorithm
     """
 
-    def __init__(self, training_set, test_set, k=1, type="classification"):
+    def __init__(self, train_x, train_y , k=1, type="classification"):
         """
-        training_set : numpy n x 3 or n x 2 matrix
-        test_set: numpy n x 3 or n x 2 matrix
+        train_x: list
+        train_y: list
         k : integer indicating the number of neareast neighbors
         type: string indicating a classification problem or regression problem
         """
-        self.training_set = np.matrix(training_set)
-        self.test_set = np.matrix(test_set)
+        self.train_x = train_x
+        self.train_y = train_y
         self.k = k
         self.type = type
         
         
-    def _distance_between_points(self, vector_1, vector_2):
-        """
-        Computes euclidean distance between points
-        vector_1: numpy matrix
-        vector_2: numpy matrix
-        returns a floating point number
-        """
-        return sp.distance.euclidean(vector_1, vector_2)
+    def predict(self, test_x):
+        pass
         
-    def fit(self):
-        """
-        Fits a KNN model to the training set
-        returns a training error and test error
-        """
+    def score(self, test_x, test_y):
         pass
