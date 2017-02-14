@@ -42,10 +42,31 @@ class KNearestNeighbors():
             # we have a regression problem and we average the values of the neareast neighbors.
             if self.type == 'classification':
                 list_of_predicted_values.append(max(set(nearest_neighbors_y_vals), key=nearest_neighbors_y_vals.count))
-            else:
+            elif self.type == 'regression':
                 list_of_predicted_values.append(sum(nearest_neighbors_y_vals)/self.k)
         return list_of_predicted_values
                 
         
     def score(self, test_x, test_y):
-        pass
+        """
+        Computes the test error and trainin errors
+        test_x: list
+        test_y: list
+        returns value: string
+        """
+        test_y_predictions = self.predict(test_x)
+        train_y_predictions = self.predict(self.train_x)
+        correctly_predicted_test = 0
+        correctly_predicted_train = 0
+        for i in range(len(test_y_predictions)):
+            if test_y_predictions[i] == test_y[i]:
+                correctly_predicted_test += 1
+            if train_y_predictions[i] == self.train_y[i]:
+                correctly_predicted_train += 1
+        
+        average_test = correctly_predicted_test/len(test_y_predictions)
+        average_train = correctly_predicted_train/len(train_y_predictions)
+        
+        results = "Training error: {}, Test error: {}".format(average_train, average_test)
+        
+        return results
