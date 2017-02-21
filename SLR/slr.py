@@ -19,7 +19,7 @@ class SimpleLinearRegression():
         Computes the covariance of train_x and train_y
         return value: float
         """
-        mean_train_xy = sum([i*j for i,j in zip(x,y)])/len(self.train_x)
+        mean_train_xy = sum([i*j for i,j in zip(self.train_x,self.train_y)])/len(self.train_x)
         return mean_train_xy - (self.mean_x)*(self.mean_y)
         
     def _variance_x(self):
@@ -52,5 +52,28 @@ class SimpleLinearRegression():
             predicted_values.append(predicted_val)
         return predicted_values
         
-    def score(self):
-        pass
+    def _sum_of_errors_squared(self,predicted_values, actual_values):
+        """
+        Computes the sum of the residuals squared
+        predicted_values: list
+        actual_values: list
+        return value: float
+        """
+        sse = sum([(i-j)**2 for i,j in zip(actual_values, predict_values)])
+        return sse
+        
+    def score(self,test_x,test_y):
+        """
+        Computes the training and test errors
+        test_x: list
+        test_y: list
+        return value: string
+        """
+        predict_values_train = self.predict(self.train_x)
+        predict_values_test = self.predict(test_x)
+        
+        sum_errors_train = self._sum_of_errors_squared(predict_values_train, self.train_y)
+        sum_errors_test = self._sum_of_errors_squared(predict_values_test, test_y)
+        
+        results = "Training error: {}, Test error: {}".format(sum_errors_train,sum_errors_test)
+        return results
