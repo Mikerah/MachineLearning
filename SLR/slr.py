@@ -40,8 +40,17 @@ class SimpleLinearRegression():
         beta_0 = self.mean_y - (beta_1)*(self.mean_x)
         return [beta_0,beta_1]
         
-    def predict(self):
-        pass
+    def predict(self, test_x):
+        """
+        Computes the predicted values this model gives
+        return values: list
+        """
+        predicted_values = []
+        parameters = self.get_parameters()
+        for test in test_x:
+            predicted_val = parameters[0] + test*parameters[1]
+            predicted_values.append(predicted_val)
+        return predicted_values
         
     def score(self):
         pass
