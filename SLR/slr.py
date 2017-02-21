@@ -32,7 +32,13 @@ class SimpleLinearRegression():
         return mean_x_squared - mean_squared
         
     def get_parameters(self):
-        pass
+        """
+        Computes the parameters for simple linear regression
+        return value: list of parameters
+        """
+        beta_1 = self._covariance()/self._variance_x()
+        beta_0 = self.mean_y - (beta_1)*(self.mean_x)
+        return [beta_0,beta_1]
         
     def predict(self):
         pass
